@@ -33,8 +33,8 @@ function getWatched(user) {
   $('#repos').empty();
   $('#loader').stop(true,false).fadeIn(500);
 
-  $.getJSON('https://api.github.com/users/'+user+'/watched', function(d) {
-    parse(d);
+  $.getJSON('https://api.github.com/users/'+user+'/watched?per_page=200&callback=?', function(d) {
+    parse(d.data);
   }).error(function() {
     $('#repos').html('<h2>Sorry, no data found.</h2>');
   });
@@ -44,7 +44,9 @@ function parse(d) {
   var repos = $('#repos');
   if ( d.length ) {
     $.each(d, function(i,item) {
-      $('#repoTemplate').tmpl(item).appendTo(repos);
+      if ( item.fork == false ) {
+        $('#repoTemplate').tmpl(item).appendTo(repos);
+      }
 
       if ( i == (d.length - 1) ) {
         $('#loader').stop(true,false).hide(0, function() {

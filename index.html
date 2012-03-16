@@ -33,7 +33,7 @@
     <div class="repo">
       <h2><a href="${html_url}">${name}</a></h2>
       {{if description }}<p>${description}</p>{{/if}}
-      {{if language }}<h3>${language}</h3>{{/if}}
+      <h3><span>${watchers} watchers / {{if language }}${language}{{/if}}</span> <a href="${owner.url}">${owner.login}</a></h3>
     </div>
   </script>
 
