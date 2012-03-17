@@ -24,7 +24,9 @@ $(window).hashchange(function() {
   var url = $.url(),
       user = url.fsegment(1);
 
-  getWatched(user);
+  if ( user ) {
+    getWatched(user);
+  }
 });
 
 function getWatched(user) {
