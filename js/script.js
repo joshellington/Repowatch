@@ -44,7 +44,7 @@ function getWatched(user) {
 
 function parse(d) {
   var repos = $('#repos');
-  if ( d.length ) {
+  if ( d.length && d.meta.status == 200 ) {
     $.each(d, function(i,item) {
       if ( item.fork == false ) {
         $('#repoTemplate').tmpl(item).appendTo(repos);
