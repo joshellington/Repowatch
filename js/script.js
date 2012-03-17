@@ -36,15 +36,17 @@ function getWatched(user) {
   $('#loader').stop(true,false).fadeIn(500);
 
   $.getJSON('https://api.github.com/users/'+user+'/watched?per_page=200&callback=?', function(d) {
+    if ( d.meta.status != 200 ) {
+      error();
+    }
+    
     parse(d.data);
-  }).error(function() {
-    $('#repos').html('<h2>Sorry, no data found.</h2>');
-  });
+  }).error(error);
 }
 
 function parse(d) {
   var repos = $('#repos');
-  if ( d.length && d.meta.status == 200 ) {
+  if ( d.length ) {
     $.each(d, function(i,item) {
       if ( item.fork == false ) {
         $('#repoTemplate').tmpl(item).appendTo(repos);
@@ -73,4 +75,8 @@ function iso() {
     itemSelector : '.repo',
     layoutMode : 'masonry'
   });
+}
+
+function error() {
+  $('#repos').html('<h2>Sorry, no data found.</h2>');
 }
