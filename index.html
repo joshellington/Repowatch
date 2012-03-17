@@ -18,6 +18,11 @@
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
+  <header>
+    <h1><a href="/">Repowatch</a></h1>
+    <h4>Get more insight on the GitHub repositories you're watching.</h4>
+  </header>
+
   <div id="container">
     <form>
       <input type="text" class="text" name="user" placeholder="Your GitHub username">
@@ -28,6 +33,10 @@
 
     <div id="repos"></div>
   </div>
+
+  <footer>
+    <p>Built by <a href="http://joshellington.com">Josh Ellington</a>. Get the source code <a href="http://github.com/joshellington/Repowatch">here</a>.</p>
+  </footer>
 
   <script id="repoTemplate" type="text/x-jquery-tmpl">
     <div class="repo">

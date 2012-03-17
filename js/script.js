@@ -1,8 +1,6 @@
-/* Author:
+/* Author: Josh Ellington
 
 */
-
-
 
 
 $(function() {
@@ -25,6 +23,7 @@ $(window).hashchange(function() {
       user = url.fsegment(1);
 
   if ( user ) {
+    $('form .text').val(user);
     getWatched(user);
   }
 });
@@ -39,13 +38,14 @@ function getWatched(user) {
     if ( d.meta.status != 200 ) {
       error();
     }
-    
+
     parse(d.data);
   }).error(error);
 }
 
 function parse(d) {
   var repos = $('#repos');
+
   if ( d.length ) {
     $.each(d, function(i,item) {
       if ( item.fork == false ) {
@@ -64,19 +64,19 @@ function parse(d) {
 function iso() {
   var repos = $('#repos');
 
-  log('isotope!');
-
   if ( repos.hasClass('isotope') ) {
     $(repos).isotope('destroy');
   }
   
   $(repos).isotope({
-    // options
     itemSelector : '.repo',
     layoutMode : 'masonry'
   });
 }
 
 function error() {
-  $('#repos').html('<h2>Sorry, no data found.</h2>');
+  $('#loader').hide(0, function() {
+    $('#repos').html('<h2>Sorry, no data found for that user. Please try again.</h2>');
+  });
 }
+
