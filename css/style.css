@@ -136,6 +136,29 @@ p {
   padding:10px 0 0;
 }
 
+#sort {
+  margin-bottom:30px;
+}
+
+  #sort span {
+    font-size:14px;
+    font-weight:300;
+  }
+
+  #sort a {
+    font-size:11px;
+    display:inline-block;
+    background:#eee;
+    padding:7px 15px;
+    border-radius:10px;
+    margin-left:5px;
+  }
+
+    #sort a:hover {
+      color:#000;
+      background:#ddd;
+    }
+
 #repos {
   /*width:665px;*/
   overflow: hidden;

@@ -14,6 +14,13 @@ $(function() {
     return false;
   });
 
+  $('#sort a').live('click', function(){
+    // get href attribute, minus the '#'
+    var sortName = $(this).attr('href').slice(1);
+    $('#repos').isotope({sortBy : sortName});
+    return false;
+  });
+
   $(window).hashchange();
 
 });
@@ -46,6 +53,8 @@ function getWatched(user) {
 function parse(d) {
   var repos = $('#repos');
 
+  log(d);
+
   if ( d.length ) {
     $.each(d, function(i,item) {
       if ( item.fork == false ) {
@@ -70,7 +79,19 @@ function iso() {
   
   $(repos).isotope({
     itemSelector : '.repo',
-    layoutMode : 'masonry'
+    layoutMode : 'masonry',
+    sortAscending : false,
+    getSortData: {
+      language: function($elem) {
+        return $elem.attr('data-language');
+      },
+      watchers: function($elem) {
+        return $elem.attr('data-watchers');
+      },
+      updated: function($elem) {
+        return $elem.attr('data-updated');
+      }
+    }
   });
 }
 
